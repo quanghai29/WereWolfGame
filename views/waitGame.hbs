@@ -1,0 +1,74 @@
+<div class="p-4 d-flex flex-wrap" id="main">
+    <div class="card bg-light mr-5 mb-5" style="max-width: 200px">
+        <img class="card-img-top m-2" src="/img/avatar1.png" alt="nhân vật" style="width:170px; max-height:220px">
+        <div class="card-body">
+            <p class="card-text">nick name</p>
+        </div>
+    </div>
+    <div class="card bg-light mr-5 mb-5" style="max-width: 200px;">
+        <img class="card-img-top m-2" src="/img/avatar1.png" alt="nhân vật" style="width:170px;max-height:220px">
+        <div class="card-body">
+            <p class="card-text">nick name</p>
+        </div>
+    </div>
+    <div class="card bg-light mr-5 mb-5" style="max-width: 200px;">
+        <img class="card-img-top m-2" src="/img/avatar1.png" alt="nhân vật" style="width:170px;max-height:220px">
+        <div class="card-body">
+            <p class="card-text">nick name</p>
+        </div>
+    </div>
+    <div class="card bg-light mr-5 mb-5" style="max-width: 200px;">
+        <img class="card-img-top m-2" src="/img/avatar1.png" alt="nhân vật" style="width:170px;max-height:220px">
+        <div class="card-body">
+            <p class="card-text">nick name</p>
+        </div>
+    </div>
+     <div class="card bg-light mr-5 mb-5" style="max-width: 200px;">
+        <img class="card-img-top m-2" src="/img/avatar1.png" alt="nhân vật" style="width:170px;max-height:220px">
+        <div class="card-body">
+            <p class="card-text">nick name</p>
+        </div>
+    </div>
+     <div class="card bg-light mr-5 mb-5" style="max-width: 200px;">
+        <img class="card-img-top m-2" src="/img/avatar1.png" alt="nhân vật" style="width:170px;max-height:220px">
+        <div class="card-body">
+            <p class="card-text">nick name</p>
+        </div>
+    </div>
+     <div class="card bg-light mr-5 mb-5" style="max-width: 200px;">
+        <img class="card-img-top m-2" src="/img/avatar1.png" alt="nhân vật" style="width:170px;max-height:220px">
+        <div class="card-body">
+            <p class="card-text">nick name</p>
+        </div>
+    </div>
+     <div class="card bg-light mr-5 mb-5" style="max-width: 200px;">
+        <img class="card-img-top m-2" src="/img/avatar1.png" alt="nhân vật" style="width:170px;max-height:220px">
+        <div class="card-body">
+            <p class="card-text">nick name</p>
+        </div>
+    </div>
+     <div class="card bg-light mr-5 mb-5" style="max-width: 200px;">
+        <img class="card-img-top m-2" src="/img/avatar1.png" alt="nhân vật" style="width:170px;max-height:220px">
+        <div class="card-body">
+            <p class="card-text">nick name</p>
+        </div>
+    </div> <div class="card bg-light mr-5 mb-5" style="max-width: 200px;">
+        <img class="card-img-top m-2" src="/img/avatar1.png" alt="nhân vật" style="width:170px;max-height:220px">
+        <div class="card-body">
+            <p class="card-text">nick name</p>
+        </div>
+    </div>
+
+    
+</div>
+
+{{#section 'js'}}
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io('localhost:3000');
+
+    $.getJSON( "/game.json", function(data) {
+        console.log(data["hai"]);
+    });
+</script>
+{{/section}}
