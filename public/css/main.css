@@ -1,0 +1,91 @@
+body{
+    padding: 0;
+    margin:0;
+}
+
+/* Main */
+#mainID{
+    padding: 0 !important;
+    margin: 0;
+    max-width: 1200px;
+}
+
+/*Background home*/
+#homeBackground{
+    position: fixed;
+    padding :0;
+    margin :0;
+    width: 1367px;
+    height: 625px;
+    -webkit-transform: scale(0.999);
+    transform: scale(0.999);
+    image-rendering: auto;
+}
+
+/* right home*/
+#rightHome{
+    position: fixed;
+    right:0;
+    left:auto;
+    background-color: #252e38;
+    color: white;
+    font-size: 5px !important;
+}
+
+
+#myAccount{
+    transition-delay: 0.1s;
+    border-bottom : 1px solid #f2bb13;
+    padding:0px;
+}
+
+#myAccount:hover{
+    opacity: 0.7;
+    cursor: pointer;
+}
+#myAvartar{
+    background-color: white;
+    width: 40px;
+    height: 40px;
+}
+
+/*search friend*/
+.search{
+    width:85%;
+    height: 35px;
+    border-radius: 15px;
+    font-size: 12px;
+    padding-left: 5px;
+    font-weight: 500;
+   
+}
+
+#iconSearch{
+    color:#f2bb13;
+}
+
+#iconSearch:hover{
+    color: rgba(242,187,19,.7);
+}
+
+
+/*List Friend*/
+#listFriend{
+    padding: 0px;
+}
+
+#member{
+    transition-delay: 0.1s;
+}
+#member:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+#online-status{
+    color: green;
+}
+#friendAvartar{
+    background-color: white;
+    width:40px;
+    height: 40px;
+}
