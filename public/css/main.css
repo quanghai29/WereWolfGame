@@ -2,7 +2,19 @@ body{
     padding: 0;
     margin:0;
 }
+::-webkit-scrollbar{
+    width: 10px;
+}
 
+::-webkit-scrollbar-track{
+    box-shadow: inset 0 0 5px none;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: #495057;
+}
 /* Main */
 #mainID{
     padding: 0 !important;
@@ -23,20 +35,25 @@ body{
 }
 
 /* right home*/
-#rightHome{
+.clsRightHome{
     position: fixed;
     right:0;
     left:auto;
     background-color: #252e38;
     color: white;
-    font-size: 5px !important;
+    font-size: 5px;
 }
 
+#rightHomeMini{
+    max-width: 42px; 
+    padding: 0;
+    
+    display: none;
+}
 
 #myAccount{
     transition-delay: 0.1s;
     border-bottom : 1px solid #f2bb13;
-    padding:0px;
 }
 
 #myAccount:hover{
@@ -72,6 +89,9 @@ body{
 /*List Friend*/
 #listFriend{
     padding: 0px;
+    max-height: 68%;
+    overflow:scroll;
+    overflow-x: hidden;
 }
 
 #member{
@@ -88,4 +108,9 @@ body{
     background-color: white;
     width:40px;
     height: 40px;
+}
+
+.btnHideShow{
+    position: absolute;
+    top: 90%;
 }
