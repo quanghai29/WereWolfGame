@@ -30,7 +30,7 @@ module.exports = {
         try {
             var dataString = fs.readFileSync(pathRoomjson , 'utf8');
             var data = JSON.parse(dataString);
-            
+            //console.log(data.index);
             //find room place
             for(let i = 0;i< data.rooms.length;i++){
                 if(data.rooms[i].place != 0){
@@ -42,7 +42,6 @@ module.exports = {
             }
             
             if(roomID != null){//update attribute of room
-
                 fs.writeFile(pathRoomjson, JSON.stringify(data), (err) => {
                     if (err) console.log('Error writing file:', err)
                 })
@@ -53,5 +52,17 @@ module.exports = {
             console.log('Error parsing JSON string:', err)
         }
         return roomID;
+    },
+    getMemberInRoom: (roomID) =>{
+        var members = [];
+        try {
+            var dataString = fs.readFileSync(pathRoomjson , 'utf8');
+            var data = JSON.parse(dataString);
+            var index = data.index[`${roomID}`];
+            members = data.rooms[`${index}`].members;
+        } catch(err) {
+            console.log('Error parsing JSON string:', err)
+        }
+        return members;
     }
 }

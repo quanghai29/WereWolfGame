@@ -7,18 +7,19 @@ module.exports = function (app, server) {
         console.log("co nguoi truy cap: "  + socket.id);
         //update id
         json.updateSocketID("haimtp",socket.id);
-
+        
         // socket.join(room);
         // io.in(room).clients((err,clis) => {
         //     console.log(clis);
         // });
 
-        //wait Gaem
+        //wait Game
         socket.on("waitGame",(username)=>{
-            console.log(username);
-            var roomID = json.findRoomPlace(username);
-            console.log(roomID);
+            //var roomID = json.findRoomPlace(username);
+            var roomID ="12345";
             socket.join(roomID);
+            var members = json.getMemberInRoom(roomID);
+            io.sockets.emit("list-members-in-room",members);
         })
     })
    
