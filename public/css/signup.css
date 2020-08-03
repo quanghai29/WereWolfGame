@@ -1,0 +1,32 @@
+html,body{
+    background-image: url("/img/background/wolfs.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+    }
+.centered-form{
+	padding-top: 100px;
+}
+
+.centered-form .panel{
+    background:rgba(0,0,0,0.5);
+    width: 100%;
+    border-radius: 10px!important;
+	box-shadow: rgba(0, 0, 0, 0.4) 20px 20px 20px;
+}
+
+.panel-body {
+    padding: 30px;
+}
+
+h3.panel-title.text-center {
+    padding-top: 30px;
+}
+
+input.btn.btn-info.btn-block {
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color: #FFC312;
+    border-color: navajowhite;
+}

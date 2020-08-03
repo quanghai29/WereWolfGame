@@ -13,6 +13,7 @@ const server = require("http").Server(app);
 app.use(express.static('public'));
 app.use(express.static('config'));
 app.use('/game',require('./routes/playGame.route'));
+app.use('/account',require('./routes/account.route'));
 
 //set nescessary
 app.set("views","./views");
