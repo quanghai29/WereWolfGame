@@ -8,8 +8,13 @@ const router = express.Router();
 
 
 //login
-router.get('',(req,res,next)=>{
+router.get('/login',(req,res,next)=>{
     res.render("login",{layout:false});
+})
+
+//sign up
+router.get('/signup',(req,res,next)=>{
+    res.render("signup",{layout:false});
 })
 
 module.exports = router;
