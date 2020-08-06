@@ -1,1 +1,1 @@
-{"rooms":[{"id":"12345","type":4,"members":["haimtp","quanghai","haimtp"],"actor":[1,2,2,3],"place":1},{"id":"34567","type":6,"members":["abc","haimtp"],"actor":[1],"place":4}],"index":{"12345":0,"34567":1}}
+{"rooms":[{"id":"12345","type":4,"members":["haimtp","haimtp"],"actor":[1,2,2,3],"place":2},{"id":"34567","type":6,"members":["abc","haimtp"],"actor":[1],"place":4}],"index":{"12345":0,"34567":1}}

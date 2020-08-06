@@ -15,8 +15,7 @@ module.exports = function (app, server) {
 
         //wait Game
         socket.on("waitGame",(username)=>{
-            //var roomID = json.findRoomPlace(username);
-            var roomID ="12345";
+            var roomID = json.findRoomPlace(username);
             socket.join(roomID);
             var members = json.getMemberInRoom(roomID);
             io.sockets.emit("list-members-in-room",members);
