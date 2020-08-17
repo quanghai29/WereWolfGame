@@ -15,10 +15,20 @@ module.exports = function (app, server) {
 
         //wait Game
         socket.on("waitGame",(username)=>{
-            var roomID = json.findRoomPlace(username);
+            var roomID = "12345";
+            //var roomID = json.findRoomPlace(username);
             socket.join(roomID);
-            var members = json.getMemberInRoom(roomID);
+            var [members, actors] = json.getMemberInRoom(roomID);
             io.sockets.emit("list-members-in-room",members);
+
+            //full place
+            if(actors !=null){
+                //get a array socketID of member in 'roomID'
+                var socketIdMember = json.getSocketIdUsers(members);
+                for(var i=0;i<socketIdMember.length;i++){
+                    io.to(socketIdMember[i]).emit("actorOfYou",actors[i]);
+                }
+            }
         })
     })
    

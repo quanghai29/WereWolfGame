@@ -26,7 +26,6 @@ module.exports = {
     },
     findRoomPlace: (username) =>{
         var roomID = null;
-        
         try {
             var dataString = fs.readFileSync(pathRoomjson , 'utf8');
             var data = JSON.parse(dataString);
@@ -42,7 +41,7 @@ module.exports = {
             }
             
             if(roomID != null){//update attribute of room
-                fs.writeFile(pathRoomjson, JSON.stringify(data), (err) => {
+                fs.writeFileSync(pathRoomjson, JSON.stringify(data), (err) => {
                     if (err) console.log('Error writing file:', err)
                 })
             }else{//room have no place -> create new room
@@ -54,15 +53,48 @@ module.exports = {
         return roomID;
     },
     getMemberInRoom: (roomID) =>{
+        var actors = null;
         var members = [];
         try {
             var dataString = fs.readFileSync(pathRoomjson , 'utf8');
             var data = JSON.parse(dataString);
+            //index of room
             var index = data.index[`${roomID}`];
+
+            //get members in room
             members = data.rooms[`${index}`].members;
+
+            if(data.rooms[`${index}`].place == 0)
+                //get actor in room
+                actors = data.rooms[`${index}`].actor;
         } catch(err) {
-            console.log('Error parsing JSON string:', err)
+            console.log(err);
         }
-        return members;
+        return [members, actors];
+    },
+    getSocketIdUsers: (usersname) =>{
+        var socketIdUsers = [];
+        try {
+            var dataString = fs.readFileSync(pathUserjson , 'utf8');
+            var data = JSON.parse(dataString);
+            for(var i=0; i < usersname.length;i++){
+                socketIdUsers[i] = data[usersname[i]];
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        return socketIdUsers;
+    },
+    getSocketIdUser: (usersname) =>{
+        var socketId =  null;
+        try {
+            var dataString = fs.readFileSync(pathUserjson , 'utf8');
+            var data = JSON.parse(dataString);
+            socketId = data[usersname];
+            
+        } catch (error) {
+            console.log(error);
+        }
+        return socketId;
     }
 }

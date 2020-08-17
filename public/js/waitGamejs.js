@@ -1,10 +1,22 @@
+var maxMemberRoom  = 4;
 $(document).ready(function () {
     //require create roomID
     socket.emit("waitGame","haimtp"); 
     socket.on("list-members-in-room",(members)=>{
         ReactDOM.render(<MemberInRoom members={members}/>, document.getElementById('main'));
     })
+    socket.on("actorOfYou",(actor)=>{
+      //alert(actor);
+    })
 });
+
+//getUsername
+$('#nameUser').keypress(function(event) {
+  if (event.key === "Enter") {
+    //send username
+    socket.emit("sendUserName",$(this).val);
+  }
+})
 
 $.getJSON( "/game.json", function(data) {
     console.log(data["hai"]);
