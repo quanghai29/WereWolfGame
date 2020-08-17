@@ -10,13 +10,6 @@ $(document).ready(function () {
     })
 });
 
-//getUsername
-$('#nameUser').keypress(function(event) {
-  if (event.key === "Enter") {
-    //send username
-    socket.emit("sendUserName",$(this).val);
-  }
-})
 
 $.getJSON( "/game.json", function(data) {
     console.log(data["hai"]);
