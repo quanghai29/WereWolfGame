@@ -10,7 +10,6 @@ const router = express.Router();
 router.get('/waitGame',(req,res,next)=>{
     res.render("waitGame",{
         user: res.locals.authUser
-    });
-})
+})});
 
 module.exports = router;

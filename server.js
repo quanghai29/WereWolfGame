@@ -9,6 +9,19 @@ const app = express();
 //create server;
 const server = require("http").Server(app);
 
+
+const session = require('express-session');
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  // cookie: {
+  //     secure: true
+  // }
+}))
+
+require('./middlewares/locals.mdw')(app);
+
 //use module
 app.use(express.static('public'));
 app.use(express.static('config'));
