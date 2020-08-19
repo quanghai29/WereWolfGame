@@ -24,7 +24,7 @@ module.exports = {
             }
         });
     },
-    findRoomPlace: (username) =>{
+    findRoomPlace: (username,type) =>{
         var roomID = null;
         try {
             var dataString = fs.readFileSync(pathRoomjson , 'utf8');

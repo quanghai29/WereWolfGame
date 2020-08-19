@@ -6,7 +6,12 @@ module.exports = function (app, server) {
     io.on("connection",(socket)=>{
         console.log("co nguoi truy cap: "  + socket.id);
         //update id
-        json.updateSocketID("haimtp",socket.id);
+        socket.on("username",(username)=>{
+            console.log(username);
+            socket.username = username;
+            json.updateSocketID(username,socket.id);
+        })
+       
         
         // socket.join(room);
         // io.in(room).clients((err,clis) => {
@@ -14,18 +19,27 @@ module.exports = function (app, server) {
         // });
 
         //wait Game
-        socket.on("waitGame",(username)=>{
-            var roomID = "12345";
-            //var roomID = json.findRoomPlace(username);
+        //Input room = ["username", "type"]
+        socket.on("waitGame",(room)=>{
+            console.log(room)
+            //JOIN user to a room
+            var roomID = json.findRoomPlace(room[0], room[1]);
             socket.join(roomID);
+
+            // receive member in room, an randoom actors 
+            // mebers = []
+            // actors = [] if fullplace else actors = null 
             var [members, actors] = json.getMemberInRoom(roomID);
+
+            //send list members in room for all user on room
             io.sockets.emit("list-members-in-room",members);
 
-            //full place
+            //already play
             if(actors !=null){
                 //get a array socketID of member in 'roomID'
                 var socketIdMember = json.getSocketIdUsers(members);
                 for(var i=0;i<socketIdMember.length;i++){
+                    //send actor of one user in room by socketID of this user
                     io.to(socketIdMember[i]).emit("actorOfYou",actors[i]);
                 }
             }

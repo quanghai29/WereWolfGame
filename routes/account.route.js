@@ -6,9 +6,7 @@ const bodyParser = require('body-parser');
 const userModel = require('../models/user.model');
 const session = require('express-session');
 
-
 const router = express.Router();
-
 
 router.use(session({secret: 'mysecret'}))
 router.use(bodyParser.urlencoded({extended: true}));

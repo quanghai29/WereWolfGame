@@ -1,4 +1,5 @@
 var socket = io('localhost:3000');
+socket.emit("username","haimtp")
 $(document).ready(function(){
     //now write your code
 
