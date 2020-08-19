@@ -40,8 +40,6 @@ router.get('/login', async (req, res) => {
         err_message: 'Login failed'
       });
   
-    delete user.f_Password;
-  
     req.session.isAuthenticated = true;
     req.session.authUser = user;
   
