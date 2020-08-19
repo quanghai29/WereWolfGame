@@ -7,6 +7,7 @@ module.exports = function (app, server) {
         //update id
         socket.on("username",(username)=>{
             socket.username = username;
+            //console.log("required: " + username);
             json.updateSocketID(username,socket.id);
         })
        
@@ -22,6 +23,7 @@ module.exports = function (app, server) {
             console.log(room)
             //JOIN user to a room
             var roomID = json.findRoomPlace(room[0], room[1]);
+            console.log(roomID);
             socket.join(roomID);
 
             // receive member in room, an randoom actors 

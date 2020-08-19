@@ -9,14 +9,19 @@ module.exports = {
                 return err;
             }
             try {
-                console.log(dataString);
+                //console.log(dataString);
                 var data = JSON.parse(dataString);
-                if(data[username]){
-                    data[username] = socketID;
-                }else{
-                    //data.`${username}` = socketID;
-                }
+                var indexUser = data.user.indexOf(username);
 
+                //already user
+                if(indexUser >= 0){
+                    //console.log(indexUser);
+                    data.index[indexUser] = socketID;
+                }else {
+                    //insert user
+                    data.user.push(username);
+                    data.index.push(socketID);
+                }
                 
                 fs.writeFile(pathUserjson, JSON.stringify(data), (err) => {
                     if (err) console.log('Error writing file:', err)
@@ -31,7 +36,7 @@ module.exports = {
         try {
             var dataString = fs.readFileSync(pathRoomjson , 'utf8');
             var data = JSON.parse(dataString);
-            //console.log(data.index);
+            
             //find room place
             for(let i = 0;i< data.rooms.length;i++){
                 if(data.rooms[i].place != 0){
@@ -61,14 +66,15 @@ module.exports = {
             var dataString = fs.readFileSync(pathRoomjson , 'utf8');
             var data = JSON.parse(dataString);
             //index of room
-            var index = data.index[`${roomID}`];
+            var index = data.index.indexOf(roomID);
+            console.log(index);
 
             //get members in room
-            members = data.rooms[`${index}`].members;
+            members = data.rooms[index].members;
 
-            if(data.rooms[`${index}`].place == 0)
+            if(data.rooms[index].place == 0)
                 //get actor in room
-                actors = data.rooms[`${index}`].actor;
+                actors = data.rooms[index].actor;
         } catch(err) {
             console.log(err);
         }

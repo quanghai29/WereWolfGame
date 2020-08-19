@@ -8,7 +8,6 @@ const session = require('express-session');
 
 const router = express.Router();
 
-router.use(session({secret: 'mysecret'}))
 router.use(bodyParser.urlencoded({extended: true}));
 
 //Login

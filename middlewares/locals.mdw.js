@@ -1,6 +1,6 @@
 module.exports = function (app) {
   app.use((req, res, next) => {
-    //console.log(req.session);
+    console.log(req.session);
     if(typeof (req.session.username) === 'undefined'){
       req.session.username = null;
     }
