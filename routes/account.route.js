@@ -11,11 +11,6 @@ const router = express.Router();
 router.use(session({secret: 'mysecret'}))
 router.use(bodyParser.urlencoded({extended: true}));
 
-
-
-//get.post
-
-
 //Login
 router.get('/login', async (req, res) => {
     res.render('login',{
@@ -37,12 +32,8 @@ router.get('/login', async (req, res) => {
         layout: false,
         err_message: 'Login failed'
       });
-  
-    delete user.f_Password;
-  
-    req.session.isAuthenticated = true;
-    req.session.authUser = user;
-  
+    
+    req.session.username = req.body.username;  
     const url = req.query.retUrl || '/';
     res.redirect(url);
   })

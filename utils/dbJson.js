@@ -9,13 +9,15 @@ module.exports = {
                 return err;
             }
             try {
+                console.log(dataString);
                 var data = JSON.parse(dataString);
                 if(data[username]){
                     data[username] = socketID;
                 }else{
-                    data[`${username}`] = socketID;
+                    //data.`${username}` = socketID;
                 }
 
+                
                 fs.writeFile(pathUserjson, JSON.stringify(data), (err) => {
                     if (err) console.log('Error writing file:', err)
                 })

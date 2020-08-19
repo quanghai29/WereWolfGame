@@ -1,9 +1,9 @@
-var maxMemberRoom  = 4;
+var maxMemberRoom  = 2;
 $(document).ready(function () {
 });
 
 //require create roomID
-socket.emit("waitGame",["haimtp",4]); 
+socket.emit("waitGame",[username,2]); 
 socket.on("list-members-in-room",(members)=>{
     ReactDOM.render(<MemberInRoom members={members}/>, document.getElementById('main'));
 })

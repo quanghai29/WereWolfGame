@@ -8,7 +8,9 @@ const router = express.Router();
 
 //wait room
 router.get('/waitGame',(req,res,next)=>{
-    res.render("waitGame");
+    res.render("waitGame",{
+        user: res.locals.authUser
+    });
 })
 
 module.exports = router;

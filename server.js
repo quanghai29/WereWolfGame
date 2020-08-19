@@ -2,7 +2,7 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const hbs_sections = require('express-handlebars-sections');
-
+const session = require('express-session');
 
 //create app
 const app = express();
@@ -12,8 +12,12 @@ const server = require("http").Server(app);
 //use module
 app.use(express.static('public'));
 app.use(express.static('config'));
-app.use('/game',require('./routes/playGame.route'));
-app.use('/account',require('./routes/account.route'));
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  // cookie: { secure: true }
+}))
 
 //set nescessary
 app.set("views","./views");
@@ -27,13 +31,16 @@ app.engine('hbs', exphbs({
 }));
 app.set('view engine', 'hbs');
 
+require('./middlewares/locals.mdw')(app,server);
+require('./middlewares/sockets.middlewares')(app,server);
+app.use('/account',require('./routes/account.route'));
+app.use('/game',require('./routes/playGame.route'));
+
+
 //render view
 app.get("/",(req,res)=>{
-    res.render("home");
+  res.render("home");
 })
-
-//sockets
-require('./middlewares/sockets.middlewares')(app,server);
 
 //run server in port
 const PORT = 3000;
