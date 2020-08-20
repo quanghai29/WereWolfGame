@@ -1,5 +1,6 @@
 const json = require('../utils/dbJson');
 const socketio = require('socket.io');
+const sleep = require('util').promisify(setTimeout);
 module.exports = function (app, server) {
     const io =  socketio.listen(server);
     io.on("connection",(socket)=>{
@@ -43,9 +44,18 @@ module.exports = function (app, server) {
                     //send actor of one user in room by socketID of this user
                     io.to(socketIdMember[i]).emit("actorOfYou",actors[i]);
                 }
+
+                //play Game
+                //control a game in a room
+
+                (async () => {
+                    console.time("Slept for")
+                    await sleep(3000)
+                    console.timeEnd("Slept for")
+                })()
+                
+                io.sockets.emit("start-game");
             }
         })
     })
-   
-   
 }

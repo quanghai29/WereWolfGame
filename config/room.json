@@ -1,1 +1,1 @@
-{"rooms":[{"id":"12345","type":2,"members":["haimtp","trinh"],"actor":[1,2],"place":0},{"id":"a47554d0-e2f1-11ea-85e0-fda4cda7d1ad","type":4,"members":["haimtp","trinh"],"actor":[3,2,2,1],"place":2}],"index":["12345","a47554d0-e2f1-11ea-85e0-fda4cda7d1ad"]}
+{"rooms":[{"id":"12345","type":2,"members":["haimtp","trinh"],"actor":[1,2],"place":0},{"id":"a47554d0-e2f1-11ea-85e0-fda4cda7d1ad","type":4,"members":["haimtp","trinh"],"actor":[3,2,2,1],"place":2}],"index":["12345"]}
