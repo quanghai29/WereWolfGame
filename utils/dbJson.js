@@ -86,7 +86,8 @@ module.exports = {
             var dataString = fs.readFileSync(pathUserjson , 'utf8');
             var data = JSON.parse(dataString);
             for(var i=0; i < usersname.length;i++){
-                socketIdUsers[i] = data[usersname[i]];
+                var index = data.index.indexOf(username[i]);
+                socketIdUsers[i] = data.user[index];
             }
         } catch (error) {
             console.log(error);

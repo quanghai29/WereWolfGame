@@ -25,6 +25,7 @@ module.exports = function (app, server) {
             var roomID = json.findRoomPlace(room[0], room[1]);
             console.log(roomID);
             socket.join(roomID);
+            socket.roomID = roomID;
 
             // receive member in room, an randoom actors 
             // mebers = []
@@ -38,6 +39,7 @@ module.exports = function (app, server) {
             if(actors !=null){
                 //get a array socketID of member in 'roomID'
                 var socketIdMember = json.getSocketIdUsers(members);
+                console.log(socketIdMember);
                 for(var i=0;i<socketIdMember.length;i++){
                     //send actor of one user in room by socketID of this user
                     io.to(socketIdMember[i]).emit("actorOfYou",actors[i]);
