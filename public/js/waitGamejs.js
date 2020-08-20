@@ -3,7 +3,7 @@ $(document).ready(function () {
 });
 
 //require create roomID
-socket.emit("waitGame",[username,2]); 
+socket.emit("waitGame",[username,4]); 
 socket.on("list-members-in-room",(members)=>{
     ReactDOM.render(<MemberInRoom members={members}/>, document.getElementById('main'));
 })

@@ -51,17 +51,18 @@ module.exports = {
                 }
             }
             
-            if(roomID != null){//update attribute of room
-                fs.writeFileSync(pathRoomjson, JSON.stringify(data), (err) => {
-                    if (err) console.log('Error writing file:', err)
-                })
-            }else{//room have no place -> create new room
+            if(roomID == null){//room have no place -> create new room
+                //create new room ID;
+                roomID = uuidv1();
+
                 var newRoom = {
-                    id: uuidv1(),
-                    members: [],
-                    place: type--,
-                    actor: []
-                }
+                    "id": roomID,
+                    "type":type,
+                    "members": [],
+                    "actor": [],
+                    "place": type-1,
+                };
+                console.log(newRoom);
                 newRoom.members.push(username);
                 var a = [1,2,2,3];
                 while(a.length != 0){
@@ -69,11 +70,15 @@ module.exports = {
                   newRoom.actor.push(a[index]);
                   var removed = a.splice(index, 1);
                 }
-                data.room.push(newRoom);
+
+                console.log(newRoom);
+                data.rooms.push(newRoom);
                 data.index.push(newRoom.id);
-                json = JSON.stringify(data); //convert it back to json
-                fs.writeFile(pathRoomjson, json, 'utf8'); 
             }
+
+            fs.writeFileSync(pathRoomjson, JSON.stringify(data), (err) => {
+                if (err) console.log('Error writing file:', err)
+            })
         } catch(err) {
             console.log('Error parsing JSON string:', err)
         }
@@ -86,14 +91,14 @@ module.exports = {
             var dataString = fs.readFileSync(pathRoomjson , 'utf8');
             var data = JSON.parse(dataString);
             //index of room
-            var index = data.index[`${roomID}`];
+            var index = data.index.indexOf(roomID);
 
             //get members in room
-            members = data.rooms[`${index}`].members;
+            members = data.rooms[index].members;
 
-            if(data.rooms[`${index}`].place == 0)
+            if(data.rooms[index].place == 0)
                 //get actor in room
-                actors = data.rooms[`${index}`].actor;
+                actors = data.rooms[index].actor;
         } catch(err) {
             console.log(err);
         }

@@ -20,10 +20,9 @@ module.exports = function (app, server) {
         //wait Game
         //Input room = ["username", "type"]
         socket.on("waitGame",(room)=>{
-            console.log(room)
             //JOIN user to a room
             var roomID = json.findRoomPlace(room[0], room[1]);
-            console.log(roomID);
+            console.log("find roomID" + roomID);
             socket.join(roomID);
             socket.roomID = roomID;
 
