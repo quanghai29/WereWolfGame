@@ -17,7 +17,30 @@ socket.on("actorOfYou",(actor)=>{
   });
 })
 
+//Socket nhận data và append vào giao diện
+socket.on("send", function (data) {
+  console.log(data);
+  $(".allMess").append("<p class='message text-light'>" + data.username + ": " + data.message + "</p>")
+})
 
+//Bắt sự kiện click gửi message
+$("#send").on('click', function () {
+  var message = $('#typeChat').val();
+
+  if (message == '') {
+      alert('Please message!!');
+  } else {
+      //Gửi dữ liệu cho socket
+      socket.emit('send', {username: username, message: message});
+      $('#typeChat').val('');
+  }
+})
+
+$("#typeChat").keyup(function(event) {
+  if (event.keyCode === 13) {
+      $("#send").click();
+  }
+});
 
 
 //react support
@@ -25,6 +48,7 @@ class Mycard extends React.Component {
   render() {
     var members = this.props.members;
     var listmember = [];
+
     for(var i=0;i<members.length;i++){
       listmember.push(
         <div class="mycard">
@@ -33,6 +57,10 @@ class Mycard extends React.Component {
         </div>
       )
     }
+
+
+    
+
     return (
       <div class ="display">{listmember}</div>
     );

@@ -62,6 +62,10 @@ module.exports = function (app, server) {
         })
 
         //chat room
+        socket.on('send', function (data) {
+            io.sockets.emit('send', data);
+        });
+
 
     })
 }
