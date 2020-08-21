@@ -1,3 +1,32 @@
+.allMess{
+    height: 82%;
+    width: 85%;
+}
+#contentChat{
+    
+}
+#typeChat{
+    width: 85%;
+}
+#chat{
+    background-color: #363e48;
+    height: 700px;
+    width: 30%;
+    position: fixed;
+    top:0;
+    right:0%;
+    left:auto;
+    padding: 20px;
+}
+#actor{
+    position: absolute;
+    left: 40%;
+    top: 20%;
+}
+.display{
+    display: flex;
+    flex-wrap: wrap;
+}
 .main{
     display: flex;
     flex-wrap: wrap;

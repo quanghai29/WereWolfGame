@@ -1,5 +1,12 @@
 {
     "1":{
-        "name": "soi"
+        "name": "Sói"
+    },
+    "2":{
+        "name": "Dân Làng"
+    },
+    "3":{
+        "name":"Nhà Tiên Tri"
     }
+    
 }

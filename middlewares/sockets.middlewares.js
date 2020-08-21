@@ -2,13 +2,14 @@ const json = require('../utils/dbJson');
 const socketio = require('socket.io');
 const sleep = require('util').promisify(setTimeout);
 module.exports = function (app, server) {
+    var roomID = null;
     const io =  socketio.listen(server);
     io.on("connection",(socket)=>{
-        console.log("co nguoi truy cap: "  + socket.id);
+        //console.log("co nguoi truy cap: "  + socket.id);
         //update id
         socket.on("username",(username)=>{
             socket.username = username;
-            //console.log("required: " + username);
+            socket.join(roomID);
             json.updateSocketID(username,socket.id);
         })
        
@@ -20,20 +21,21 @@ module.exports = function (app, server) {
 
         //wait Game
         //Input room = ["username", "type"]
-        socket.on("waitGame",(room)=>{
+        socket.on("waitGame",async (room)=>{
             //JOIN user to a room
-            var roomID = json.findRoomPlace(room[0], room[1]);
-            console.log("find roomID" + roomID);
+            roomID = json.findRoomPlace(room[0], room[1]);
+            console.log("find roomID: " + roomID);
             socket.join(roomID);
             socket.roomID = roomID;
 
             // receive member in room, an randoom actors 
             // mebers = []
             // actors = [] if fullplace else actors = null 
-            var [members, actors] = json.getMemberInRoom(roomID);
+            var [members, actors] = await json.getMemberInRoom(roomID);
 
             //send list members in room for all user on room
-            io.sockets.emit("list-members-in-room",members);
+            console.log("member in room");
+            io.sockets.in(roomID).emit("list-members-in-room",members);
 
             //already play
             if(actors !=null){
@@ -46,16 +48,20 @@ module.exports = function (app, server) {
                 }
 
                 //play Game
+
                 //control a game in a room
 
-                (async () => {
-                    console.time("Slept for")
-                    await sleep(3000)
-                    console.timeEnd("Slept for")
-                })()
+                // (async () => {
+                //     console.time("Slept for")
+                //     await sleep(3000)
+                //     console.timeEnd("Slept for")
+                // })()
                 
-                io.sockets.emit("start-game");
+                // io.sockets.emit("start-game");
             }
         })
+
+        //chat room
+        
     })
 }

@@ -1,12 +1,23 @@
 {{#section 'css'}}
 <link rel="stylesheet" href="/css/waitGame.css">
 {{/section}}
-<div id="username" class="hidden">{{user.username}}</div>
 <div id="main">
+</div>
+<div id="actor">
+
+</div>
+<div id="chat">
+  <div class="allMess">
+
+  </div>
+  <div class="form-group d-flex mt-2" id="contentChat">
+    <input type="text"
+      class="form-control mr-2 w-2" name="typeChat" id="typeChat" aria-describedby="helpId" placeholder="">
+  </div>
 </div>
 {{#section 'js'}}
   <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>  
-<script src="/js/waitGamejs.js" type="text/babel"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <script src="/js/waitGamejs.js" type="text/babel"></script>
 {{/section}}

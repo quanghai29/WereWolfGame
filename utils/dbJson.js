@@ -3,6 +3,29 @@ const pathUserjson = './config/user.json';
 const pathRoomjson = './config/room.json'
 var uuidv1 = require('uuidv1');
 
+
+// random array actor
+const randomActor = function(a){
+    var result = [];
+    while(a.length != 0){
+      var index = Math.floor(Math.random() * a.length);
+      result.push(a[index]);
+      var removed = a.splice(index, 1);
+    }
+    return result;
+}
+
+// random id room 
+const makeid = function(length){
+    var text = "";
+    var possible = "0123456789";
+   
+    for (var i = 0; i < length; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+   
+    return text;
+}
+
 module.exports = {
     updateSocketID: (username, socketID) =>{
         fs.readFile( pathUserjson , 'utf8', function (err, dataString) {
@@ -34,6 +57,7 @@ module.exports = {
             }
         });
     },
+
     findRoomPlace: (username,type) =>{
         var roomID = null;
         try {
@@ -53,7 +77,7 @@ module.exports = {
             
             if(roomID == null){//room have no place -> create new room
                 //create new room ID;
-                roomID = uuidv1();
+                roomID = makeid(10);
 
                 var newRoom = {
                     "id": roomID,
@@ -62,16 +86,13 @@ module.exports = {
                     "actor": [],
                     "place": type-1,
                 };
-                console.log(newRoom);
+                //console.log(newRoom);
                 newRoom.members.push(username);
                 var a = [1,2,2,3];
-                while(a.length != 0){
-                  var index = Math.floor(Math.random() * a.length);
-                  newRoom.actor.push(a[index]);
-                  var removed = a.splice(index, 1);
-                }
 
-                console.log(newRoom);
+                newRoom.actor = randomActor(a);
+
+                //console.log(newRoom);
                 data.rooms.push(newRoom);
                 data.index.push(newRoom.id);
             }
@@ -110,20 +131,22 @@ module.exports = {
             var dataString = fs.readFileSync(pathUserjson , 'utf8');
             var data = JSON.parse(dataString);
             for(var i=0; i < usersname.length;i++){
-                var index = data.index.indexOf(username[i]);
-                socketIdUsers[i] = data.user[index];
+                var index = data.user.indexOf(usersname[i]);
+                socketIdUsers[i] = data.index[index];
             }
         } catch (error) {
             console.log(error);
         }
         return socketIdUsers;
     },
-    getSocketIdUser: (usersname) =>{
+    getSocketIdUser: (username) =>{
         var socketId =  null;
         try {
             var dataString = fs.readFileSync(pathUserjson , 'utf8');
             var data = JSON.parse(dataString);
-            socketId = data[usersname];
+            var index = data.user.indexOf(username);
+            if(index >=0)
+                socketId = data.index[index];
             
         } catch (error) {
             console.log(error);
