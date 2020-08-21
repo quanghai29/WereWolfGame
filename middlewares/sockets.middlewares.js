@@ -51,17 +51,17 @@ module.exports = function (app, server) {
 
                 //control a game in a room
 
-                // (async () => {
-                //     console.time("Slept for")
-                //     await sleep(3000)
-                //     console.timeEnd("Slept for")
-                // })()
+                (async () => {
+                    console.time("Slept for")
+                    await sleep(3000)
+                    console.timeEnd("Slept for")
+                })()
                 
                 // io.sockets.emit("start-game");
             }
         })
 
         //chat room
-        
+
     })
 }
