@@ -112,5 +112,11 @@ module.exports = function (app, server) {
         socket.on('send', function (data) {
             io.sockets.emit('send', data);
         });
+
+        //list friend
+        socket.on("load-list-friend",() =>{
+            var usernames = json.getSocketUsernames();
+            io.sockets.emit("list-friend",usernames);
+        })
     })
 }

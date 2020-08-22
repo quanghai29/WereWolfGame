@@ -152,5 +152,19 @@ module.exports = {
             console.log(error);
         }
         return socketId;
-    }
+    },
+    getSocketUsernames: () =>{
+        var socketUsernames = [];
+        try {
+            var dataString = fs.readFileSync(pathUserjson , 'utf8');
+            var data = JSON.parse(dataString);
+            for(var i=0; i < data.user.length;i++){
+                socketUsernames[i] = data.user[i];
+            }
+            
+        } catch (error) {
+            console.log(error);
+        }
+        return socketUsernames;
+    },
 }
