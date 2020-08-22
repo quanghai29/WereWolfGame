@@ -1,12 +1,22 @@
 {
+    "-1":{
+        "name":"Killer",
+        "ability":"-1",
+        "nameAbility":"Bị Giết"
+    },
     "1":{
-        "name": "Sói"
+        "name": "Sói",
+        "ability": "1",
+        "nameAbility":"Sát Hại"
     },
     "2":{
-        "name": "Dân Làng"
+        "name": "Dân Làng",
+        "ability":"0",
+        "nameAbility":"Không Có"
     },
     "3":{
-        "name":"Nhà Tiên Tri"
+        "name":"Nhà Tiên Tri",
+        "ability":"2",
+        "nameAbility":"Dự Đoán Sói"
     }
-    
 }

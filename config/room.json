@@ -1,1 +1,1 @@
-{"rooms":[{"id":"0944716680","type":4,"members":[],"actor":[3,2,2,1],"place":0}],"index":["0944716680"]}
+{"rooms":[{"id":"0944716680","type":4,"members":["robot1","haimtp"],"actor":[2,3,1,2],"place":0},{"id":"5692380406","type":4,"members":["haimtp"],"actor":[2,2,1,3],"place":3}],"index":["0944716680","5692380406"]}

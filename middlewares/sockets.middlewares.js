@@ -1,5 +1,6 @@
 const json = require('../utils/dbJson');
 const socketio = require('socket.io');
+const game= require('../config/game.json');
 const sleep = require('util').promisify(setTimeout);
 module.exports = function (app, server) {
     var roomID = null;
@@ -49,12 +50,58 @@ module.exports = function (app, server) {
 
                 //play Game
 
-                //control a game in a room
 
+                //control a game in a room
+                const wait = 5;
+                const afternoon = 15;
+                const morning = 30;
                 (async () => {
-                    console.time("Slept for")
-                    await sleep(3000)
-                    console.timeEnd("Slept for")
+                    io.sockets.in(roomID).emit("prepare-afternoon",wait);
+                    await sleep(5*1000);
+
+                    var actor = -1;
+                    var user = null;
+                    var code = -1;
+                    
+                    
+                    //start specified enable of actor
+                    for(var i=0;i<socketIdMember.length;i++){
+                        //send actor of one user in room by socketID of this user
+                        var codeAbility = game[actors[i]].ability;
+                        io.to(socketIdMember[i]).emit("use-ability",codeAbility);
+                    }
+                    io.sockets.in(roomID).emit("afternoon",afternoon);
+
+                    socket.on("killPlayEr",(player)=>{
+                        //change ability of killer
+                        var index = members.indexOf(player);
+                        actors[index] = -1;
+                        code = 1;
+                        user = player;
+                    })
+
+                    socket.on("showPlayer",(player)=>{
+                         //change ability of killer
+                         var index = members.indexOf(player);
+                         actor = actors[index];
+                         code = 2;
+                         user = player;
+                    })
+
+                    
+                    await sleep((afternoon + 1)*1000);
+                    if(code == 1){
+                        io.sockets.in(roomID).emit("a-player-killed",user);
+                    }
+                    if(code == 2){
+                        socket.emit("a-player-showed",[user,actor]);
+                    }
+
+                    io.sockets.in(roomID).emit("morning", morning);
+                    await sleep((morning + 1)*1000);
+
+                    //send choose sói
+                    
                 })()
                 
                 // io.sockets.emit("start-game");
