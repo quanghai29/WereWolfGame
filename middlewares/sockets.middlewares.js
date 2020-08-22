@@ -101,7 +101,7 @@ module.exports = function (app, server) {
                     await sleep((morning + 1)*1000);
 
                     //send choose sói
-                    
+
                 })()
                 
                 // io.sockets.emit("start-game");
@@ -109,6 +109,8 @@ module.exports = function (app, server) {
         })
 
         //chat room
-
+        socket.on('send', function (data) {
+            io.sockets.emit('send', data);
+        });
     })
 }
