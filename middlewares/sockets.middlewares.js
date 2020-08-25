@@ -14,7 +14,6 @@ client.flushdb( function (err, succeeded) {
 });
 module.exports = function (app, server) {
     const io =  socketio.listen(server);
-    var [members, actors] = [[],[]];
     io.on("connection",(socket)=>{
         //console.log("co nguoi truy cap: "  + socket.id);
         var roomID = null;
@@ -36,11 +35,12 @@ module.exports = function (app, server) {
             console.log("find roomID: " + roomID);
             socket.join(roomID);
             socket.roomID = roomID;
+            socket.emit("roomID",roomID);
 
             // receive member in room, an randoom actors 
             // mebers = []
             // actors = [] if fullplace else actors = null 
-            [members, actors] = await json.getMemberInRoom(roomID);
+            var [members, actors] = await json.getMemberInRoom(roomID);
 
             //send list members in room for all user on room
             console.log("member in room");
@@ -92,10 +92,37 @@ module.exports = function (app, server) {
                             io.to(socketIdMember[i]).emit("use-ability",codeAbility);
                         }
 
-                        await sleep(2200);                    
+                        await sleep(2200);
+                        //Thời gian tối, user sử dụng chức năng của nhân vật                    
                         io.sockets.in(roomID).emit("afternoon",afternoon); 
                         await sleep((afternoon + 3)*1000);
-    
+
+                        //Xét thắng thua (TH phe dân die)
+                        var [code , result] = [,[]];
+                        client.lrange(roomID + "result",0,-1, (err,value)=>{
+                            if(err){
+                                console.log(err);
+                                return ;
+                            }
+                            console.log("Win Or Fail");
+                            [code,result] = myUtil.findWinMember(value,actors);
+                        })
+                        await sleep(500);
+                        console.log(code);
+                        console.log(result);
+                        if(code!=0){
+                            await sleep(1000);
+                            console.log("Kết thúc game");
+                            for(var i=0;i<socketIdMember.length;i++){
+                                //send actor of one user in room by socketID of this user
+                                io.to(socketIdMember[i]).emit("end-game",result[i]);
+                            }
+                            client.del(roomID + "result");
+                            break;
+                        }
+
+
+                        //Trời sáng có thể thảo luận tự do
                         io.sockets.in(roomID).emit("morning", morning);
                         await sleep((morning + 2)*1000);
     
@@ -134,8 +161,8 @@ module.exports = function (app, server) {
                         })
                         await sleep(300);
     
-                        var [code , result] = [,[]];
-                        //xét thắng thua
+                       
+                        //xét thắng thua ====================
                         client.lrange(roomID + "result",0,-1, (err,value)=>{
                             if(err){
                                 console.log(err);
@@ -144,9 +171,9 @@ module.exports = function (app, server) {
                             console.log("Win Or Fail");
                             [code,result] = myUtil.findWinMember(value,actors);
                         })
-    
+                
                         await sleep(500);
-    
+                
                         console.log(code);
                         console.log(result);
                         if(code!=0){
@@ -164,7 +191,8 @@ module.exports = function (app, server) {
             }
         })
 
-        socket.on("reportWolf",(player)=>{
+        socket.on("reportWolf",async (player)=>{
+            var [members, actors] = await json.getMemberInRoom(roomID);
             var index = members.indexOf(player);
             // //client.expire(roomID,10);
             client.lrange(roomID,0,-1, (err,value)=>{
@@ -182,7 +210,8 @@ module.exports = function (app, server) {
             })
         })
 
-        socket.on("showPlayer",(player)=>{
+        socket.on("showPlayer",async (player)=>{
+            var [members, actors] = await json.getMemberInRoom(roomID);
             //show ability of member
             var index = members.indexOf(player);
             console.log("show player");
@@ -190,7 +219,8 @@ module.exports = function (app, server) {
             socket.emit("a-player-showed",[player,actors[index]]);
         })
 
-        socket.on("killPlayEr",(player)=>{
+        socket.on("killPlayEr",async (player)=>{
+            var [members, actors] = await json.getMemberInRoom(roomID);
            //change ability of killer
            console.log("a-player-killed");
            console.log(actors);
@@ -210,7 +240,9 @@ module.exports = function (app, server) {
         })
         //chat room
         socket.on('send', function (data) {
-            io.sockets.emit('send', data);
+            //io.sockets.emit('send', data);
+            console.log('send message');
+            io.sockets.in(roomID).emit('send',data)
         });
 
         //list friend
@@ -219,4 +251,7 @@ module.exports = function (app, server) {
             io.sockets.emit("list-friend",usernames);
         })
     })
+
+
+    
 }

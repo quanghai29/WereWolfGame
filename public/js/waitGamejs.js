@@ -3,6 +3,7 @@ var members ;
 var player = null;
 var codeAble = -1;
 var Result = -2;
+var roomID = socket.roomID;
 $(document).ready(function () {
   $("#rightHome").fadeOut(0);
   $("#rightHomeMini").fadeIn(0);
@@ -38,7 +39,10 @@ $(document).ready(function () {
 
 
 //require create roomID
-socket.emit("waitGame",[username,maxMemberRoom]); 
+socket.emit("waitGame",[username,maxMemberRoom]);
+socket.on("roomID",(roomID)=>{
+  $("#roomID").text("id: " + roomID);
+})
 socket.on("list-members-in-room",(mbs)=>{
   members = mbs;
   ReactDOM.render(<Mycard members={mbs}/>, document.getElementById('main'));
@@ -208,7 +212,7 @@ socket.on("end-game",(codeResult)=>{
   $("#notify").text(textNote);
   $("#notify").show();
   $("#notify").animate({left: "180px"},1000,()=>{
-    $("#notify").fadeOut("slow");
+    
   });
   $("#ability").text("Về Sảnh");
   $("#ability").css("opacity","1");
