@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
@@ -30,11 +30,24 @@
         <!--List friend expand-->
         <div class="container col-2 h-100 clsRightHome" id="rightHome">
             {{!-- my info --}}
-            <div class="mb-1 d-flex shadow-lg mt-2" id="myAccount">
+            <form action="/account/logout" method="post" id="frmLogout">
+            <div class="dropdown">
+                <div class="dropdown-toggle mb-1 d-flex shadow-lg mt-2 " id="myAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="/img/user/avatar1.png" class="img-fluid mt-2 mb-2 p-1" alt="account" id="myAvartar">
+                    <h6 class="username mt-3 ml-3">{{username}}</h6>
+                    <i class="fas fa-angle-down fa-5x ml-2 mt-3"></i>
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+                    <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">Đăng xuất</a>
+                </div>
+            </div>
+            </form>
+            {{!-- <div class="mb-1 d-flex shadow-lg mt-2" id="myAccount">
                 <img src="/img/user/avatar1.png" class="img-fluid mt-2 mb-2 p-1" alt="account" id="myAvartar">
                 <h6 class="username mt-3 ml-3">{{username}}</h6>
                 <i class="fas fa-angle-down fa-5x ml-2 mt-3"></i>
-            </div>
+            </div> --}}
             {{!-- search friend --}}
             <div>
                 <input class="search mb-2 mt-2">

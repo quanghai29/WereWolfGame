@@ -3,7 +3,7 @@ const express = require('express');
 const exphbs  = require('express-handlebars');
 const hbs_sections = require('express-handlebars-sections');
 const session = require('express-session');
-
+const authUser = require('./middlewares/auth.mdw')
 //create app
 const app = express();
 //create server;
@@ -39,7 +39,7 @@ app.use('/game',require('./routes/playGame.route'));
 
 
 //render view
-app.get("/",(req,res)=>{
+app.get("/",authUser,(req,res)=>{
   res.render("home");
 })
 

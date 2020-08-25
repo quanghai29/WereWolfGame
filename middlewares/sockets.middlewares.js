@@ -114,6 +114,7 @@ module.exports = function (app, server) {
                             await sleep(1000);
                             console.log("Kết thúc game");
                             for(var i=0;i<socketIdMember.length;i++){
+                                
                                 //send actor of one user in room by socketID of this user
                                 io.to(socketIdMember[i]).emit("end-game",result[i]);
                             }
@@ -173,9 +174,9 @@ module.exports = function (app, server) {
                         })
                 
                         await sleep(500);
-                
                         console.log(code);
                         console.log(result);
+
                         if(code!=0){
                             await sleep(1000);
                             console.log("Kết thúc game");

@@ -4,8 +4,7 @@ const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 
 const userModel = require('../models/user.model');
-const session = require('express-session');
-
+const authRole = require('../middlewares/auth.mdw');
 const router = express.Router();
 
 router.use(bodyParser.urlencoded({extended: true}));
@@ -38,12 +37,10 @@ router.get('/login', async (req, res) => {
   })
   
   
-//   router.post('/logout', (req, res) => {
-//     req.session.isAuthenticated = false;
-//     req.session.authUser = null;
-//     req.session.role=-1;
-//     res.redirect('/user/login');
-//   });
+  router.post('/logout', (req, res) => {
+    req.session.username = false;
+    res.redirect('/account/login');
+  });
 
 //Sign up
 router.get('/signup', async (req, res) => {
@@ -78,7 +75,7 @@ router.get('/signup', async (req, res) => {
     const result = await userModel.add(entity);
     console.log(result);
   
-    res.redirect('/');
+    res.redirect('/account/login');
   });
 
 module.exports = router;
