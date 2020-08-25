@@ -1,1 +1,1 @@
-{"rooms":[{"id":"0944716680","type":4,"members":["robot1","robot2","haimtp"],"actor":[2,2,1,3],"place":1},{"id":"1864955047","type":4,"members":["haimtp"],"actor":[1,2,2,3],"place":3}],"index":["0944716680","1864955047"]}
+{"rooms":[{"id":"0944716680","type":4,"members":["robot1","robot2","haimtp",""],"actor":[2,2,1,3],"place":0},{"id":"1864955047","type":4,"members":["haimtp","haimtp","",""],"actor":[1,2,2,3],"place":0},{"id":"0878147628","type":4,"members":["","haimtp"],"actor":[2,1,2,3],"place":2}],"index":["0944716680","1864955047","0878147628"]}
