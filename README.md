@@ -12,3 +12,5 @@
   + các task khác (để làm xong task trên r tính tiếp :)) ).
 
 - Git change in here 
+
+- Git change in original 
