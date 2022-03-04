@@ -2,6 +2,8 @@
 
 Đồ án game ma sói webonline: change here
 
+- Change in Upstream
+
 - Các màn hình:
   + view home (bao gồm nút play, history, infomation,...)
   + view vào phòng (các thẻ là ảnh đại diện, tên nick của người chơi, gán nhân vật cho ng chơi ,đồng hồ chạy,...)
